@@ -9,7 +9,7 @@
 ################################## Classes ###############################################
 ##########################################################################################
 
-iasis:ِAhmedConcept 	rdf:type	owl:Class;
+iasis:AhmedConcept	rdf:type	owl:Class;
 				rdfs:label	"Ahmed";
 				rdfs:comment "Constituents of thoughts or real world entities.";
 				dcterms:modified "2017-10-23"^^xsd:date;
