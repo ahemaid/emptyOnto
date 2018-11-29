@@ -1,3 +1,2504 @@
-@prefix mv: <http://purl.org/net/mobivoc/> .
-@prefix owl:<http://www.w3.org/2002/07/owl#> .
-@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix iasis: <http://iasis/vocab/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+##########################################################################################
+################################## Classes ###############################################
+##########################################################################################
+
+iasis:Concept 	rdf:type	owl:Class;
+				rdfs:label	"Concept";
+				rdfs:comment "Constituents of thoughts or real world entities.";
+				dcterms:modified "2017-10-23"^^xsd:date;
+				dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:Annotation	rdf:type	owl:Class;
+					rdfs:label	"Annotation";
+					rdfs:comment "Explanation of a concept including label, id and source of concept.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:Relation	rdf:type	owl:Class;
+					rdfs:label	"Relation";
+					rdfs:comment "Relations between concepts.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://en.wikipedia.org/wiki/Mar%C3%ADa-Esther_Vidal>.
+
+iasis:SourceName	rdf:type	owl:Class;
+					rdfs:label	"SourceName";
+					rdfs:comment "Source name.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:Image rdf:type owl:Class;
+			rdfs:label	"MedicalImage";
+			rdfs:subClassOf	iasis:Concept;
+			iasis:partOf iasis:ClinicalRecord;
+			rdfs:comment "Patient's medical images.";
+			dcterms:modified "2017-10-23"^^xsd:date;
+			dcterms:creator <https://en.wikipedia.org/wiki/Mar%C3%ADa-Esther_Vidal>.
+
+iasis:Test 	rdf:type owl:Class;
+			rdfs:label	"MedicalTest";
+			rdfs:subClassOf	iasis:Concept;
+			iasis:partOf iasis:ClinicalRecord;
+			rdfs:comment "Medical procedure performed to detect, diagnose, or monitor diseases, disease processes, susceptibility, and determine a course of treatment.";
+			dcterms:modified "2017-10-23"^^xsd:date;
+			dcterms:creator <https://en.wikipedia.org/wiki/Mar%C3%ADa-Esther_Vidal>.
+
+#### WP4 requirements: 
+
+iasis:Publication	rdf:type	owl:Class;
+					rdfs:label	"Publication";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "Scientific publications.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:MENTIONED_IN	rdf:type owl:Class;
+					rdfs:label	"MentionedIn";
+					rdfs:subClassOf iasis:Relation;
+					rdfs:comment	"A relation that shows in which publication each specific CUI term has been appeared.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:HAS_TOPIC	rdf:type owl:Class;
+				rdfs:label	"HasTopic";
+				rdfs:subClassOf iasis:Relation;
+				rdfs:comment	"A relation that shows which CUI has been appeared in each specific publication.";
+				dcterms:modified "2017-10-23"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:ASSOCIATED_WITH	rdf:type owl:Class;
+						rdfs:label	"AssociatedWith";
+						rdfs:subClassOf iasis:Relation;
+						rdfs:comment	"UMLS Annotation.";
+						dcterms:modified "2017-10-23"^^xsd:date;
+						dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:CAUSES	rdf:type owl:Class;
+				rdfs:label	"Causes";
+				rdfs:subClassOf iasis:Relation;
+				rdfs:comment	"UMLS Annotation.";
+				dcterms:modified "2017-10-23"^^xsd:date;
+				dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:INHIBITS	rdf:type owl:Class;
+				rdfs:label	"Inhibits";
+				rdfs:subClassOf iasis:Relation;
+				rdfs:comment	"UMLS Annotation.";
+				dcterms:modified "2017-10-23"^^xsd:date;
+				dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:INITERACTS_WITH rdf:type owl:Class;
+					rdfs:label	"InteractsWith";
+					rdfs:subClassOf iasis:Relation;
+					rdfs:comment	"UMLS Annotation.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:PREDISPOSES 	rdf:type owl:Class;
+					rdfs:label	"Predisposes";
+					rdfs:subClassOf iasis:Relation;
+					rdfs:comment	"UMLS Annotation.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+iasis:STIMULATES 	rdf:type owl:Class;
+					rdfs:label	"Stimulates";
+					rdfs:subClassOf iasis:Relation;
+					rdfs:comment	"UMLS Annotation.";
+					dcterms:modified "2017-10-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+#### COSMIC requirements:
+
+iasis:Gene 	rdf:type owl:Class;
+			rdfs:label	"Gene";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "Genes, which are made up of DNA, are the basic physical and functional unit of heredity.";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Sample 	rdf:type owl:Class;
+				rdfs:label	"Sample";
+				rdfs:subClassOf	iasis:Concept;
+				rdfs:comment "A specimen of a whole entity.";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Tumor rdf:type owl:Class;
+			rdfs:label	"Tumor";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "Tumor is an abnormal mass of tisuue that results when cells didive more than they should or do not die when they should.";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Mutation 	rdf:type owl:Class;
+				rdfs:label	"Mutation";
+				rdfs:subClassOf	iasis:Concept;
+				rdfs:comment "A permanent alteration in the DNA sequence that makes up a gene, such that the sequence differs from what is found in most people.";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:CNV 	rdf:type owl:Class;
+			rdfs:label	"CopyNumberVariation";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "The genetic trait involving the variation of the number of copies of a particular gene present in the genome between individuals. ";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:CGI 	rdf:type owl:Class;
+			rdfs:label	"CpG_island";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "CGIs are regions of the genome that contain a large number of CpG dinucleotide repeats. Although most CGIs linked to promoters are non-methylated, majority of CGIs may be completely methylated in normal cells.";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:GExp 	rdf:type owl:Class;
+			rdfs:label	"GeneExpression";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "The phenotypic manifestation of a gene or genes by the processes of genetic transcription and genetic translation.";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Transcript	rdf:type	owl:Class;
+					rdfs:label	"Transcript";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "Single-stranded RNA product synthesized by transcription of DNA.";
+					dcterms:modified "2017-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Tissue	rdf:type	owl:Class;
+					rdfs:label	"Primary Tissue";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "The primary tissue/cancer from which the sample originated.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:SubTissue	rdf:type	owl:Class;
+					rdfs:label	"Tissue Subtype";
+					rdfs:subClassOf	iasis:Tissue;
+					rdfs:comment "Sub classification (level 1 and level 2) of the samples tissue of origin.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:TissueType	rdf:type	owl:Class;
+					rdfs:label	"Primary Histology";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "The histological classification of the tissue from which the sample originated.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:TissueSubType	rdf:type	owl:Class;
+					rdfs:label	"Histology Subtype";
+					rdfs:subClassOf	iasis:TissueType;
+					rdfs:comment "Further histological classification (level 1) of the sample.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Zygosity	rdf:type	owl:Class;
+					rdfs:label	"Mutation Zygosity";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "Type of mutation on whether the mutation was reported to be homozygous, heterozygous or unknown within the sample.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+#### WP3 requirements:
+
+iasis:Protein 	rdf:type owl:Class;
+				rdfs:label	"Protein";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "Large and complex molecules that play many critical roles in the body. They are required for the structure, function and regulation of the body's tissues and organs.";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:RBP_RNA_PhysicalInteraction	rdf:type	owl:Class;
+									rdfs:label	"RBP_RNA_interaction";
+									rdfs:subClassOf	iasis:Relation;
+									rdf:comment "Interaction between RNA binding protein (the mediator factor) and RNA. ";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:EQTL	rdf:type owl:Class;
+			rdfs:label	"eQTL";
+			rdfs:subClassOf	iasis:Concept;
+			rdf:comment "An eQTL is a locus that explains a fraction of the genetic variance of a gene expression phenotype.";
+			dcterms:modified "2018-07-24"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+#### Drug requirements:
+
+iasis:Drug	rdf:type owl:Class;
+			rdfs:label	"Drug";
+			rdfs:subClassOf	iasis:Concept;
+			rdf:comment "A substance used as a medication or in the preparation of medication.";
+			dcterms:modified "2018-07-24"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:SideEffect rdf:type	owl:Class;
+					rdfs:label	"SideEffect";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "The set of observable characteristics of an individual resulting from the interaction of its genotype with the environment. This class include side effects that result from different drugs.";
+					dcterms:modified "2018-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:DrugSideEffect	rdf:type owl:Class;
+						rdfs:label	"DrugSideEffectRelation";
+						rdfs:subClassOf	iasis:Concept;
+						rdf:comment "The Drug SideEffect relation should be a class since has two properties";
+						dcterms:modified "2017-07-24"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Enzyme	rdf:type owl:Class;
+				rdfs:label	"Enzyme";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "Macromolecular biological catalyst that accelerate chemical reactions. Most enzymes are proteins.";
+				dcterms:modified "2017-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Effect	rdf:type owl:Class;
+				rdfs:label	"Effect";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "The effectiveness of a drug according to its interaction with another drug.";
+				dcterms:modified "2018-10-23"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Impact	rdf:type owl:Class;
+				rdfs:label	"Impact";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "The impact that interaction between two drugs has on the performance of the drug.";
+				dcterms:modified "2018-10-23"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:EffectInteraction	rdf:type owl:Class;
+				rdfs:label	"EffectInteraction";
+				rdfs:subClassOf	iasis:Relation;
+				rdf:comment "The relation between two drugs that interact.";
+				dcterms:modified "2018-10-23"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Disorder	rdf:type owl:Class;
+				rdfs:label	"Disorder";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "Disorders!";
+				dcterms:modified "2018-10-30"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Target	rdf:type owl:Class;
+				rdfs:label	"Target";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "A drug target is a molecule in the body, usually a protein, that is intrinsically associated with a particular disease process and that could be addressed by a drug to produce a desired therapeutic effect.";
+				dcterms:modified "2018-10-30"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:BioSystem	rdf:type owl:Class;
+				rdfs:label	"BioSystem";
+				rdfs:subClassOf	iasis:Concept;
+				rdf:comment "Including all drug targets, enzymes, transpoders, and carriers";
+				dcterms:modified "2018-10-30"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+#### WP2 requirements:
+#### clinical notes:
+
+iasis:Observation    rdf:type        owl:Class;
+					rdfs:label	"iasis:Observation";
+					rdfs:subClassOf	 iasis:Concept;
+					rdfs:comment "Any record that relates to monitoring a process.";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Patient rdf:type owl:Class;
+					rdfs:label	"Patient";
+					rdfs:subClassOf	iasis:Concept;
+					rdf:comment "A person who is receiving medical care.";
+					dcterms:modified "2018-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:LCPatient	rdf:type owl:Class;
+				rdfs:label	"LungCancerPatient";
+				rdfs:subClassOf	iasis:Patient;
+				rdf:comment "A patient who is diagnosed with Lung Cancer.";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+	
+iasis:LiquidBiopsy 	rdf:type owl:Class;
+					rdfs:label	"LiquidBiopsy";
+					rdfs:subClassOf	iasis:Test;
+					rdfs:comment	"A test done on a sample of blood to look for cancer cells from a tumor that are circulating in the blood or for pieces of DNA from tumor cells that are in the blood.";
+					dcterms:modified "2018-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:TumorStage	rdf:type owl:Class;
+					rdfs:label	"TumorStage";
+					rdfs:comment "Represents the assessment of the stage of tumor in a particular date.";
+					dcterms:modified "2018-10-04"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:PerformanceStatus	rdf:type	owl:Class;
+			rdfs:label	"PerformanceStatus";
+			rdfs:comment "Patient's level of functioning in terms of her/his ability for caring her/himself, daily activities and phyical abilities.";
+			dcterms:modified "2018-09-27"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:FamiliarAntecedent	rdf:type	owl:Class;
+							rdfs:label	"FamiliarAntecedent";
+							rdfs:comment "Familiar antecedents of the patient.";
+							dcterms:modified "2018-09-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Gender	rdf:type	owl:Class;
+						rdfs:label	"GenderOfPatient";
+						rdfs:comment "The gender of the patients.";
+						dcterms:modified "2018-09-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:ChemotherapyDrug	rdf:type	owl:Class;
+						rdfs:subClassOf iasis:Drug;
+						rdfs:label	"Chemotherapy";
+						rdfs:comment "Specific chemotherapy drugs prescribed to the Entity.";
+						dcterms:modified "2018-09-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:DrugGroup	rdf:type	owl:Class;
+						rdfs:subClassOf iasis:Concept;
+						rdfs:label	"DrugGroup";
+						rdfs:comment "The type of drugs that has been prescribed to the patient.";
+						dcterms:modified "2018-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:TumorType	rdf:type	owl:Class;
+						rdfs:subClassOf iasis:Concept;
+						rdfs:label	"TumorType";
+						rdfs:comment "The histology kind of the lung cancer. The type of tumor.";
+						dcterms:modified "2018-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Date	rdf:type	owl:Class;
+						rdfs:subClassOf iasis:Concept;
+						rdfs:label	"Date";
+						rdfs:comment "Date";
+						dcterms:modified "2018-10-30"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:Biomarker	 rdf:type	owl:Class;
+					rdfs:label	"Biomarker";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "A biomarker, or biological marker is a measurable indicator of some biological state or condition.";
+					dcterms:modified "2018-11-22"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:PerformanceObservation   rdf:type      owl:Class;
+					rdfs:label	"iasis:PerformanceObservation";
+					rdfs:subClassOf	iasis:Observation;
+					rdfs:comment "";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:TumorObservation    rdf:type        owl:Class;
+					rdfs:label	"iasis:TumorObservation";
+					rdfs:subClassOf	 iasis:Observation;
+					rdfs:comment "";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+#### clinical images:
+
+iasis:Diagnosis  	rdf:type owl:Class;
+					rdfs:label	"Diagnosis";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "The identification of the nature of an illness or other problem by examination of the symptoms.";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.  
+
+iasis:LCImage   	rdf:type owl:Class;
+					rdfs:label	"LCImage";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "Image of patient with Lung Cancer";
+					dcterms:modified "2018-11-25"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.  
+
+iasis:LungLaterality   	rdf:type owl:Class;
+						rdfs:label	"LungLaterality";
+						rdfs:subClassOf	iasis:Concept;
+						rdfs:comment "The laterality of lung to which the image refers.";
+						dcterms:modified "2018-11-26"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.  
+
+iasis:Modality   	rdf:type owl:Class;
+					rdfs:label	"Modality";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "Modality of image";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>. 
+
+iasis:Organ     	rdf:type owl:Class;
+					rdfs:label	"Organ";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "The organ which the image belong to.";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:PatientPosition   rdf:type owl:Class;
+						rdfs:label	"PatientPosition";
+						rdfs:subClassOf	iasis:Concept;
+						rdfs:comment "Patient position";
+						dcterms:modified "2018-11-26"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:BodyPartExamined rdf:type         owl:Class;
+					rdfs:label	"BodyPartExamined";
+					rdfs:subClassOf	iasis:Concept;
+					rdfs:comment "";
+					dcterms:modified "2018-11-25"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+####### lc_similarity:
+
+iasis:PatientSimilarity   rdf:type owl:Class;
+			rdfs:label	"PatientSimilarity";
+			rdfs:subClassOf	iasis:Concept;
+			rdfs:comment "";
+			dcterms:modified "2018-11-27"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+##################################################################################################
+################################### Properties ###################################################
+##################################################################################################
+
+iasis:annID	rdf:type	owl:DatatypeProperty;
+			rdfs:label	"AnnotationID";
+			rdfs:domain iasis:Annotation;
+			rdfs:range	rdfs:Literal;
+			rdfs:comment	"Identification of instances of Annotation class";	
+			dcterms:modified "2018-11-27"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:annLabel	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"AnnotationLabel";
+				rdfs:domain	iasis:Annotation;
+				rdfs:range	rdfs:Literal;
+                		rdfs:comment	"Label of instances of Annotation class";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:provenance	rdf:type	owl:ObjectProperty;
+					rdfs:label	"provenance";
+					rdfs:domain iasis:Concept;
+					rdfs:range	iasis:SourceName;
+					rdfs:comment	"The name of the source from which the concept is extracted or derived";
+					dcterms:modified "2017-11-23"^^xsd:date;
+					dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
+
+
+iasis:hasAnnotation	rdf:type owl:ObjectProperty;
+								rdfs:label	"CUI Annotation";
+								rdfs:domain iasis:Concept;
+				  				rdfs:range iasis:Annotation;
+								rdfs:comment	"CUI annotation of the concept.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:relation_relatesTo_annotation	rdf:type	owl:ObjectProperty;
+								rdfs:label	"hasAnnotation";
+								rdfs:domain	iasis:Relation;
+								rdfs:range	iasis:Annotation;
+								rdfs:comment	"Connection between mentionedIn or HasTopic relation with CUI.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:source	rdf:type	owl:ObjectProperty;
+					rdfs:label	"Source";
+					rdfs:domain iasis:Protein;
+					rdfs:range	iasis:SourceName;
+					rdfs:comment	"The  source from which the concept is extracted or derived";
+					dcterms:modified "2018-11-23"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+#### WP4 requirements:
+
+iasis:pubmedID	rdf:type owl:DatatypeProperty;
+					rdfs:label "PubMed ID";
+					rdfs:domain iasis:Publication;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "PubMed ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:semanticType	rdf:type	owl:DatatypeProperty;
+					rdfs:label	"semanticType";
+					rdfs:domain	iasis:Annotation;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment	"A list with the allowed semantic_types for this Annotation in the UMLS. ";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:year	rdf:type	owl:DatatypeProperty;
+			rdfs:label	"year";
+			rdfs:domain	iasis:Publication;
+			rdfs:range	rdfs:Literal;
+			rdfs:comment	"Year of Publication";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:author	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"authors";
+				rdfs:domain	iasis:Publication;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Authors of publication";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:journal	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"journal";
+				rdfs:domain	iasis:Publication;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Journal of publication";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>. 
+
+iasis:annotates	rdf:type	owl:ObjectProperty;
+							rdfs:label	"annotates";
+							rdfs:domain	iasis:Relation;
+							rdfs:range	iasis:Annotation;
+							rdfs:comment	"Connection between mentionedIn or HasTopic relation with CUI.";
+							dcterms:modified "2018-04-12"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:confidence     rdf:type     owl:DatatypeProperty;
+							rdfs:label	"confidence";
+							rdfs:domain	iasis:Relation;
+                                                      	rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:relation_isRelatedTo_annotation	rdf:type        owl:ObjectProperty;	
+				                rdfs:label	"relation_isRelatedTo_annotation";
+						rdfs:domain	iasis:Relation;
+						rdfs:range	iasis:Annotation;
+						rdfs:comment	".";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:title     rdf:type     owl:DatatypeProperty;
+							rdfs:label	"title";
+							rdfs:domain	iasis:Publication;
+                                                      	rdfs:range	rdfs:Literal;
+							rdfs:comment "Title of Publication.";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+#### COSMIC requirements:
+
+iasis:geneLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "GeneName";
+					rdfs:domain iasis:Gene;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "HUGU name of the gene.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:geneHugoID	rdf:type owl:DatatypeProperty;
+					rdfs:label "GeneHUGU_ID";
+					rdfs:domain iasis:Gene;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "HUGU ID for the gene.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:sampleLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "SampleName";
+					rdfs:domain iasis:Sample;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Sample Name.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:sampleID	rdf:type owl:DatatypeProperty;
+					rdfs:label "SampleID";
+					rdfs:domain iasis:Sample;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Sample ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tumorID	rdf:type owl:DatatypeProperty;
+					rdfs:label "TumorID";
+					rdfs:domain iasis:Tumor;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Tumor ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutationID	rdf:type owl:DatatypeProperty;
+					rdfs:label "MutationID";
+					rdfs:domain iasis:Mutation;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Mutation ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutationLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "MutationName";
+					rdfs:domain iasis:Mutation;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Mutation Name.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cgiID	rdf:type owl:DatatypeProperty;
+					rdfs:label "CGI_ID";
+					rdfs:domain iasis:CGI;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "CGI ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnvID	rdf:type owl:DatatypeProperty;
+					rdfs:label "CNV_ID";
+					rdfs:domain iasis:CNV;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "CNV ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:sampleSource	rdf:type owl:DatatypeProperty;
+					rdfs:label "SampleSource";
+					rdfs:domain iasis:Sample;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Where the sample has originated from including the tumor type.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:description	rdf:type owl:DatatypeProperty;
+					rdfs:label	"Description";
+					rdfs:domain iasis:Annotation;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "A property of Annotation Class";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cds_length 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"LengthOfGene";
+					rdfs:domain iasis:Gene;
+				 	rdfs:range rdfs:Literal;
+					rdfs:comment	"Length of the gene by counting the number of base pair that are included.";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:sampleAge	rdf:type owl:DatatypeProperty;
+			rdfs:label	"AgeOfSample";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range rdfs:Literal;
+			rdfs:comment	"Information about the age of sample";
+			dcterms:modified "2017-07-24"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:subTissueLabel	rdf:type owl:DatatypeProperty;
+			rdfs:label	"TissueSubtypeLabel";
+			rdfs:domain iasis:SubTissue;          
+		  	rdfs:range rdfs:Literal;
+			rdfs:comment	"Name of Tissue Subtype.";
+			dcterms:modified "2018-09-26"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tissueTypeLabel	rdf:type owl:DatatypeProperty;
+			rdfs:label	"tissueTypeLabel";
+			rdfs:domain iasis:TissueType;          
+		  	rdfs:range rdfs:Literal;
+			rdfs:comment	"Name of tissueType.";
+			dcterms:modified "2018-09-26"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tissueLabel	rdf:type owl:DatatypeProperty;
+			rdfs:label	"PrimaryTissueLabel";
+			rdfs:domain iasis:Tissue;          
+		  	rdfs:range rdfs:Literal;
+			rdfs:comment	"Name of Primary Tissue.";
+			dcterms:modified "2018-09-26"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tissueSubTypeLabel	rdf:type owl:DatatypeProperty;
+			rdfs:label	"HistologySubtypeLabel";
+			rdfs:domain iasis:TissueSubType;          
+		  	rdfs:range rdfs:Literal;
+			rdfs:comment	"Name of Histology Subtype.";
+			dcterms:modified "2018-09-26"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:primaryHistology	rdf:type owl:DatatypeProperty;
+			rdfs:label	"PrimaryHistology";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range iasis:TissueType;
+			rdfs:comment	"Name of Primary Histology.";
+			dcterms:modified "2018-11-23"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:histologySubtype1	rdf:type owl:DatatypeProperty;
+			rdfs:label	"HistologySubtype1";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range iasis:TissueSubType;
+			rdfs:comment	"Name of Subtype Histology 1.";
+			dcterms:modified "2018-11-23"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tissueSubType1	rdf:type owl:DatatypeProperty;
+			rdfs:label	"TissueSubType1";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range iasis:SubTissue;
+			rdfs:comment	".";
+			dcterms:modified "2018-11-22"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tissueSubtype2	rdf:type owl:DatatypeProperty;
+			rdfs:label	"TissueSubType2";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range iasis:SubTissue;
+			rdfs:comment	".";
+			dcterms:modified "2018-11-22"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:primaryTissue	rdf:type owl:DatatypeProperty;
+			rdfs:label	"PrimaryTissue";
+			rdfs:domain iasis:Sample;          
+		  	rdfs:range iasis:Tissue;
+			rdfs:comment	".";
+			dcterms:modified "2018-11-23"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:zygosity   	rdf:type owl:DatatypeProperty;
+				rdfs:label	"Zygosity";
+				rdfs:domain	iasis:Mutation;
+				rdfs:range	rdfs:Zygosity;	
+				rdfs:comment	".";
+				dcterms:modified "2018-11-23"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:zygosityLabel	rdf:type owl:DatatypeProperty;
+				rdfs:label	"ZygosityLabel";
+				rdfs:domain	iasis:Zygosity;
+				rdfs:range	rdfs:Literal;	
+				rdfs:comment	"Homozygous or heterozygous or nothing as unknown.";
+				dcterms:modified "2018-09-26"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:z_score   	rdf:type owl:DatatypeProperty;
+					rdfs:label	"z_score";
+					rdfs:domain iasis:Gexp;
+				 	rdfs:range rdfs:Literal;
+					rdfs:comment	".";
+					dcterms:modified "2018-11-23"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:mutation_NucleotideSeq	rdf:type	owl:DatatypeProperty;
+								rdfs:label	"MutationNucleotideSequence";
+								rdfs:domain	iasis:Mutation;
+								rdfs:range rdfs:Literal;
+								rdfs:comment "The new column produced from Mutation CDS column, excluding c. Those including extra characters are ignored to be added to this column.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnv_chromosome	rdf:type owl:DatatypeProperty;
+						rdfs:label	"cnvChromosome";
+						rdfs:domain iasis:CNV;
+				 		rdfs:range rdfs:Literal;
+						rdfs:comment	"Chromose in which the CNV is located on";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_chromosome	rdf:type owl:DatatypeProperty;
+							rdfs:label	"mutationChromosome";
+							rdfs:domain iasis:Mutation;
+				 			rdfs:range rdfs:Literal;
+							rdfs:comment	"Chromosome in which the mutation is occured";
+							dcterms:modified "2018-04-12"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cgi_chromosome	rdf:type owl:DatatypeProperty;
+						rdfs:label	"CpGislandChromosome";
+						rdfs:domain iasis:CGI;
+				 		rdfs:range rdfs:Literal;
+						rdfs:comment	"Chromosome in which the CGI is loacted";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_strand	rdf:type owl:DatatypeProperty;
+						rdfs:label	"mutationStrand";
+						rdfs:domain iasis:Mutation;
+			 			rdfs:range rdfs:Literal;
+						rdfs:comment	"Strand in which the mutation is occured";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnv_start	rdf:type owl:DatatypeProperty;
+				rdfs:label	"cnvStartPosition";
+				rdfs:domain iasis:CNV;
+				rdfs:range rdfs:Literal;
+				rdfs:comment	"Starting point of CNV";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_start	rdf:type owl:DatatypeProperty;
+						rdfs:label	"mutationStartPosition";
+						rdfs:domain iasis:Mutation;
+						rdfs:range rdfs:Literal;
+						rdfs:comment	"Starting point of the mutation";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnv_end	rdf:type owl:DatatypeProperty;
+				rdfs:label	"cnvEndPosition";
+				rdfs:domain iasis:CNV;
+		  		rdfs:range rdfs:Literal;
+				rdfs:comment	"Ending point of CNV";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_end	rdf:type owl:DatatypeProperty;
+					rdfs:label	"mutationEndPosition";
+					rdfs:domain iasis:Mutation;
+		  			rdfs:range rdfs:Literal;
+					rdfs:comment	"Ending point of the mutation";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:genomic_position	rdf:type owl:DatatypeProperty;
+						rdfs:label	"CpGislandGenomicPosition";
+						rdfs:domain iasis:CGI;
+					   	rdfs:range rdfs:Literal;	
+						rdfs:comment	"Genomic position";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnv_studyID	rdf:type owl:DatatypeProperty;
+					rdfs:label	"cnvStudyID";
+					rdfs:domain iasis:CNV;
+			   		rdfs:range rdfs:Literal;
+					rdfs:comment	"The ID of the study in which the CNV is mentioned";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_study_id	rdf:type owl:DatatypeProperty;
+						rdfs:label	"mutationStudyID";
+						rdfs:domain iasis:Mutation;
+			   			rdfs:range rdfs:Literal;
+						rdfs:comment	"The ID of the study in which the mutation is mentioned";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cgi_studyID	rdf:type owl:DatatypeProperty;
+					rdfs:label	"CpGislandStudyID";
+					rdfs:domain iasis:CGI;
+			   		rdfs:range rdfs:Literal;
+					rdfs:comment	"The ID of the study in which the CGI is mentioned";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:gexp_studyID	rdf:type owl:DatatypeProperty;
+					rdfs:label	"gexpStudyID";
+					rdfs:domain iasis:GExp;
+			   		rdfs:range rdfs:Literal;
+					rdfs:comment	"The ID of the srudy in which the geneExpression is mentioned";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_cds 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"mutationCDS";
+					rdfs:domain iasis:Mutation;
+				   	rdfs:range rdfs:Literal;
+					rdfs:comment	"Nucleotide sequence of the mutation";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_aa 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"mutationAA";
+					rdfs:domain iasis:Mutation;
+				  	rdfs:range rdfs:Literal;
+					rdfs:comment	"Peptide sequence of the mutation";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>. 
+
+iasis:fathmm_prediction rdf:type owl:DatatypeProperty;
+						rdfs:label	"fathmm";
+						rdfs:domain iasis:Mutation;
+						rdfs:range rdfs:Literal;
+						rdfs:comment	"Functional Analysis through Hidden Markov Models: predicts the functional consequences of both coding variants, i.e. non-synonymous single nucleotide variants (nsSNVs), and non-coding variants.";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:fathmm_score 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"fathmmScore";
+					rdfs:domain iasis:Mutation;
+				   	rdfs:range rdfs:Literal;
+					rdfs:comment	"A single p-value, ranging from 0 to 1. Scores above 0.5 are deleterious, but in order to highlight the most significant data in COSMIC, only scores ≥ 0.7 are classified as 'Pathogenic'. Mutations are classed as 'Neutral' if the score is ≤ 0.5.";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_somatic_status 	rdf:type owl:DatatypeProperty;
+								rdfs:label	"mutation_somatic_status";
+								rdfs:domain iasis:Mutation;
+							  	rdfs:range rdfs:Literal;
+								rdfs:comment	"Information on whether the sample was reported to be Confirmed Somatic, Previously Reported or Variant of unknown origin.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tumor_origin 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"tumorOrigin";
+					rdfs:domain iasis:Mutation;
+				   	rdfs:range rdfs:Literal;
+					rdfs:comment	"Describes where the sample has originated from including the tumour type";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:beta_value	rdf:type owl:DatatypeProperty;
+					rdfs:label	"beta-value";
+					rdfs:domain iasis:CGI;
+				 	rdfs:range rdfs:Literal;
+					rdfs:comment	"Beta-value for the probe in the tumour sample. Only values > 0.8 (High) or < 0.2 (Low) are included.";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:avg_beta_value 	rdf:type owl:DatatypeProperty;
+						rdfs:label	"averageBeta-value";
+						rdfs:domain iasis:CGI;
+					 	rdfs:range rdfs:Literal;
+						rdfs:comment	"Average beta-value across the normal population.";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:two_sided_p-value rdf:type owl:DatatypeProperty;
+						rdfs:label	"twoSidedP-value";
+						rdfs:domain iasis:CGI;
+						rdfs:range rdfs:Literal;
+						rdfs:comment	"Combining two statistical tests in a two-part model.";
+						dcterms:modified "2018-04-12"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:total_cn 	rdf:type owl:DatatypeProperty;
+				rdfs:label	"totalCopyNumber";
+				rdfs:domain iasis:CNV;
+			   	rdfs:range rdfs:Literal;
+				rdfs:comment	"Sum of the major and minor allele counts.";
+				dcterms:modified "2018-04-12"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.   
+
+iasis:minor_allele 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"minorAllele";
+					rdfs:domain iasis:CNV;
+				   	rdfs:range rdfs:Literal;
+					rdfs:comment	"Number of copies of the least frequent allele.";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:methylation 	rdf:type owl:DatatypeProperty;
+					rdfs:label	"methylation";
+					rdfs:domain	iasis:CGI;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment	"Methylation level: H (High) : beta-value > 0.8, L (Low) : beta-value < 0.2 ";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:loh	rdf:type owl:DatatypeProperty;
+			rdfs:label	"LOH";
+			rdfs:domain	iasis:Mutation;
+			rdfs:range	rdfs:Literal;
+			rdfs:comment	"LOH information on whether the gene was reported to have Loss of heterozygosity (a common genetic event in cancer development) in the sample. ";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:snp	rdf:type owl:DatatypeProperty;
+			rdfs:label	"SNP";
+			rdfs:domain	iasis:Mutation;
+			rdfs:range	rdfs:Literal;
+			rdfs:comment	"All the known SNPs are flagged as: is SNP.";
+			dcterms:modified "2018-04-12"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:regulation	rdf:type owl:DatatypeProperty;
+					rdfs:label	"Regulation";
+					rdfs:domain	iasis:GExp;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment	"It could be over or under depending on the scores from different platforms if they are above or below the threshold.";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutationDescription	rdf:type owl:DatatypeProperty;
+							rdfs:label	"mutationDescription";
+							rdfs:domain	iasis:Mutation;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment "Is extracted from mutation dataset. ";
+							dcterms:modified "2018-04-12"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutationType	rdf:type owl:DatatypeProperty;
+					rdfs:label	"MutationType";
+					rdfs:domain	iasis:CNV;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment "Is extracted from CNV dataset";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:sampleSource	rdf:type	owl:DatatypeProperty;
+					rdfs:label	"sampleSource";
+					rdfs:domain	iasis:Sample;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment "Appears in resistanceMutation dataset";
+					dcterms:modified "2018-04-12"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+
+iasis:gene_isRelatedTo_sample	rdf:type	owl:ObjectProperty;
+								rdfs:label	"gene_isRelatedTo_sample";
+								rdfs:domain	iasis:Gene;
+								rdfs:range	iasis:Sample;
+								rdfs:comment "Relation between Gene and Sample classes.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:gene_isTranscribedAs_transcript	rdf:type	owl:ObjectProperty;
+											rdfs:label	"gene_isTranscribedAs_transcript";
+											rdfs:domain	iasis:Gene;	
+											rdfs:range	iasis:Transcript;
+											rdfs:comment "Transcript of gene.";
+											dcterms:modified "2018-04-12"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_mentionedIn_publication	rdf:type owl:ObjectProperty;
+										rdfs:label	"MutationMentionedInPublication";
+										rdfs:domain iasis:Mutation;
+				   						rdfs:range iasis:Publication;
+										rdfs:comment	"Extracted from Mutation dataset.";
+										dcterms:modified "2018-04-12"^^xsd:date;
+										dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:mutation_isLocatedIn_gene	rdf:type owl:ObjectProperty;
+								rdfs:label	"MutationIsLocatedInGene";
+								rdfs:domain iasis:Mutation;
+				  				rdfs:range iasis:Gene;
+								rdfs:comment	"The gene in which the mutation occurs.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_isLocatedIn_sample	rdf:type owl:ObjectProperty;
+									rdfs:label	"mutation_isLocatedIn_sample";
+									rdfs:domain iasis:Mutation;
+				  					rdfs:range iasis:Sample;
+									rdfs:comment	"The sample in which the mutation occurs.";
+									dcterms:modified "2018-04-12"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_isResistantTo_drug	rdf:type	owl:ObjectProperty;
+									rdfs:label	"mutation_isResistantTo_drug";
+									rdfs:domain	iasis:Mutation;
+									rdfs:range	iasis:Drug;
+									rdfs:comment	" Yes: if reported mutation confers drug resistance. -: means resistance data is unknown; there is no evidence for resistance or it is a known primary mutation.";
+									dcterms:modified "2018-04-12"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:mutation_isLocatedIn_transcript	rdf:type	owl:ObjectProperty;	
+										rdfs:label	"mutation_isLocatedIn_transcript";
+										rdfs:domain iasis:Mutation;
+				  						rdfs:range iasis:Transcript;
+										rdfs:comment	"The transcript in which the mutation occurs.";
+										dcterms:modified "2018-04-12"^^xsd:date;
+										dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+iasis:sample_isTakenFrom_tumor	rdf:type owl:ObjectProperty;
+								rdfs:label	"sample_isTakenFrom_tumor";
+								rdfs:domain iasis:Sample;
+								rdfs:range iasis:Tumor;
+								rdfs:commnet	"The tumor from which the sample is taken.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cgi_isLocatedIn_gene	rdf:type owl:ObjectProperty;
+							rdfs:label	"cgi_isLocatedIn_gene";
+							rdfs:domain iasis:CGI;
+				 			rdfs:range iasis:Gene;
+							rdfs:comment	"Relation between CGI and Gene classes.";
+							dcterms:modified "2018-04-12"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cgi_isLocatedIn_sample	rdf:type owl:ObjectProperty;
+								rdfs:label	"cgi_isLocatedIn_sample";
+								rdfs:domain iasis:CGI;
+					 			rdfs:range iasis:Sample;
+								rdfs:comment	"Relation between CGI and Sample classes.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:cnv_isLocatedIn_gene	rdf:type owl:ObjectProperty;
+							rdfs:label	"cnv_isLocatedIn_gene";
+							rdfs:domain iasis:CNV;
+			     			rdfs:range iasis:Gene;
+							rdfs:comment	"Relation between CNV and Gene classes.";
+							dcterms:modified "2018-04-12"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:cnv_isLocatedIn_sample	rdf:type owl:ObjectProperty;
+								rdfs:label	"cnv_isLocatedIn_sample";
+								rdfs:domain iasis:CNV;
+				  				rdfs:range iasis:Sample;
+								rdfs:comment	"Relation between CNV and Sample classes.";
+								dcterms:modified "2018-04-12"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:gexp_isRelatedTo_gene	rdf:type owl:ObjectProperty;
+							rdfs:label "gexp_isRelatedTo_gene";
+							rdfs:domain iasis:Gexp;
+			     				rdfs:range iasis:Gene;
+							rdfs:comment	"Relation between Gexp and Gene classes.";
+							dcterms:modified "2018-09-26"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:gexp_isRelatedTo_sample	rdf:type owl:ObjectProperty;
+							rdfs:label "gexp_isRelatedTo_gene";
+							rdfs:domain iasis:Gexp;
+			     				rdfs:range iasis:Sample;
+							rdfs:comment	"Relation between Gexp and Sample classes.";
+							dcterms:modified "2018-09-26"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+#### WP3 requirements:
+
+iasis:transcriptID                      	rdf:type owl:DatatypeProperty;
+											rdfs:label	"TranscriptID";
+											rdfs:domain iasis:Transcript;
+			        						        rdfs:range rdfs:Literal;
+											rdfs:comment	"Ensembl ID of transcript.";
+											dcterms:modified "2018-11-27"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:proteinID                    	rdf:type owl:DatatypeProperty;
+												rdfs:label	"proteinID";
+												rdfs:domain iasis:Protein;
+			        							        rdfs:range rdfs:Literal;
+												rdfs:comment	"Uniprot Accession key for protein.";
+												dcterms:modified "2018-11-27"^^xsd:date;
+												dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+iasis:variant_affects_transcript	rdf:type owl:ObjectProperty;
+									rdfs:label	"variant_affects_transcript";
+									rdfs:domain iasis:SNP;
+                 					rdfs:range iasis:Transcript;
+                 					rdfs:comment "It's trans-eQTL: trans-acting expression quantitative trait loci, i.e. genomic variants that affect the expression of distant (trans) genes) from three sources: GTEx, Joehanes et al. and a Dutch group (Lude Franke)";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:transcript_isRelatedTo_transcription	rdf:type owl:ObjectProperty;
+											rdfs:label	"transcript_isRelatedTo_transcription";
+											rdfs:domain iasis:Transcript;
+			        						rdfs:range iasis:Transcription;
+											rdfs:comment	"Connection between transcription and corresponding transcript.";
+											dcterms:modified "2018-07-24"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:transcription_isExpressedAs_gexp	rdf:type owl:ObjectProperty;
+										rdfs:label	"transcription_isExpressedAs_gexp";
+										rdfs:domain iasis:Transcription;
+			        					rdfs:range iasis:GExp;
+										rdfs:comment	"Connection between transcription and gene expression.";
+										dcterms:modified "2018-07-24"^^xsd:date;
+										dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:protein_isRelatedTo_physicalInteraction	rdf:type owl:ObjectProperty;
+												rdfs:label	"protein_isRelatedTo_physicalInteraction";
+												rdfs:domain iasis:Protein;
+			        							rdfs:range iasis:RBP_RNA_PhysicalInteraction;
+												rdfs:comment	"Connection between protein and RBP-RNA physical interaction relation. ";
+												dcterms:modified "2018-07-24"^^xsd:date;
+												dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+	
+iasis:transcript_isRelatedTo_physicalInteraction	rdf:type owl:ObjectProperty;
+													rdfs:label	"transcript_isRelatedTo_physicalInteraction";
+													rdfs:domain iasis:Transcript;
+			        								rdfs:range iasis:RBP_RNA_PhysicalInteraction;
+													rdfs:comment	"Connection between transcript and RBP-RNA physical interaction relation.";
+													dcterms:modified "2018-07-24"^^xsd:date;
+													dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:translates_as rdf:type owl:ObjectProperty;
+					rdfs:label	"translates_as";
+					rdfs:domain iasis:Transcript;
+                    rdfs:range iasis:Protein;
+					rdfs:comment	"connection between protein and the transcript from which it has been translated.";
+					dcterms:modified "2018-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:omixcore 	rdf:type owl:DatatypeProperty;
+				rdfs:label	"omixcore";
+				rdfs:domain iasis:RBP_RNA_PhysicalInteraction;
+               	rdfs:range rdfs:Literal;
+				rdfs:comment	"OmiXcore is an algorithm as part of catRAPID integrates the information coming from protein and >14,000 lincRNA fragments into an overall binding propensity value. It is based on a non-linear algorithm trained on the interaction propensities of protein fragments for RNA regions to predict binding affinities (i.e. read counts normalized by expression levels).";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tissue 	rdf:type owl:DatatypeProperty;
+				rdfs:label	"tissue";
+				rdfs:domain iasis:EQTL;
+               	rdfs:range rdfs:Literal;
+				rdfs:comment	"The tissue in which variation has been observed.";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:variation_isLocatedIn_gene 	rdf:type owl:ObjectProperty;
+									rdfs:label	"UpstreamGene";
+									rdfs:domain iasis:EQTL;
+               						rdfs:range iasis:Gene;
+									rdfs:comment	"The gene on which the variation is located.";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:gexpChanges_occuredIn_gene 	rdf:type owl:ObjectProperty;
+									rdfs:label	"DownstreamGene";
+									rdfs:domain iasis:EQTL;
+               						rdfs:range iasis:Gene;
+									rdfs:comment	"The gene where the GE level is changed.";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:type 	rdf:type owl:DatatypeProperty;
+			rdfs:label	"eQTLtype";
+			rdfs:domain iasis:EQTL;
+			rdfs:range rdfs:Literal;
+			rdfs:comment	"Regulatory variants are characterized as either cis or trans acting, reflecting the predicted nature of interactions and of course depending on the physical distance from the gene they regulate.";
+			dcterms:modified "2018-07-24"^^xsd:date;
+			dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:qvalue 	rdf:type owl:DatatypeProperty;
+				rdfs:label	"q-value";
+				rdfs:domain iasis:EQTL;
+               	rdfs:range rdfs:Literal;
+				rdfs:comment	"log10q";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:dbsnp 	rdf:type owl:ObjectProperty;
+				rdfs:label	"dbsnpID";
+				rdfs:domain iasis:EQTL;
+				rdfs:range iasis:Dbsnp;
+				rdfs:comment	"Varriation ID in dbsnp database";
+				dcterms:modified "2018-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:eqtl_chromosome 	rdf:type owl:DatatypeProperty;
+						rdfs:label	"eqtlChromosome";
+						rdfs:domain iasis:EQTL;
+               			rdfs:range rdfs:Literal;
+						rdfs:comment	"Chromosome position of eQTL.";
+						dcterms:modified "2018-07-24"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:eqtl_position 	rdf:type owl:DatatypeProperty;
+						rdfs:label	"eqtlPosition";
+						rdfs:domain iasis:EQTL;
+               			rdfs:range rdfs:Literal;
+						rdfs:comment	"Genomic position of eQTL.";
+						dcterms:modified "2018-07-24"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+#### Drug requirements:
+
+iasis:drugID	rdf:type owl:DatatypeProperty;
+					rdfs:label "Drug_ID";
+					rdfs:domain iasis:Drug;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Drug ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "DrugLabel";
+					rdfs:domain iasis:Drug;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Drug label.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:phenotypeID rdf:type owl:DatatypeProperty;
+					rdfs:label "Phenotype_ID";
+					rdfs:domain iasis:Phenotype;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Phenotype ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:phenotypeLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "PhenotypeLabel";
+					rdfs:domain iasis:Phenotype;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Phenotype Label.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:enzymeID	rdf:type owl:DatatypeProperty;
+					rdfs:label "EnzymeID";
+					rdfs:domain iasis:Enzyme;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Enzyme ID.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:enzymeLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "EnzymeLabel";
+					rdfs:domain iasis:Enzyme;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Enzyme Label.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugDrugInteraction	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drug_interactsWith_drug";
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"Represents drug-drug interactions.";
+								dcterms:modified "2018-07-24"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:drug_isPredictedToInteractWith_drug	rdf:type	owl:ObjectProperty;
+											rdfs:label	"drug_isPredictedToInteractWith_drug";
+											rdfs:domain	iasis:Drug;
+											rdfs:range	iasis:Drug;
+											rdfs:comment	"Predicts drug-drug interactions using semEP.";
+											dcterms:modified "2018-07-24"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drug_interactsWith_enzyme	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drug_interactsWith_enzyme";
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Enzyme;
+								rdfs:comment	"Represents drug-enzyme (as target) interactions.";
+								dcterms:modified "2018-07-24"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:drug_isPredictedToInteractWith_enzyme	rdf:type	owl:ObjectProperty;
+											rdfs:label	"drug_isPredictedToInteractWith_enzyme";
+											rdfs:domain	iasis:Drug;
+											rdfs:range	iasis:Enzyme;
+											rdfs:comment	"Predicts drug-enzyme interactions using semEP.";
+											dcterms:modified "2018-07-24"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drug_interactsWith_protein	rdf:type	owl:ObjectProperty;
+									rdfs:label	"drug_interactsWith_protein";
+									rdfs:domain	iasis:Drug;
+									rdfs:range	iasis:Protein;
+									rdfs:comment	"Represents drug-protein (as target) interactions.";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:drug_isPredictedToHave_sideEffect	rdf:type	owl:ObjectProperty;
+										rdfs:label	"drug_isPredictedToHave_sideEffect";
+										rdfs:domain	iasis:Drug;
+										rdfs:range	iasis:SideEffect;
+										rdfs:comment	"Predicts drug-sideEffect relations using semEP.";
+										dcterms:modified "2018-07-24"^^xsd:date;
+										dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drug_isRelatedTo_dse	rdf:type	owl:ObjectProperty;
+							rdfs:label	"drug_isRelatedTo_dse";
+							rdfs:domain	iasis:Drug;
+							rdfs:range	iasis:DrugSideEffect;
+							rdfs:comment	"Connection between drug and drug-sideEffect relation.";
+							dcterms:modified "2018-07-24"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:sideEffect_isRelatedTo_dse	rdf:type	owl:ObjectProperty;
+									rdfs:label	"sideEffect_isRelatedTo_dse";
+									rdfs:domain	iasis:SideEffect;
+									rdfs:range	iasis:DrugSideEffect;
+									rdfs:comment	"Connection between sideEffect and drug-sideEffect relation.";
+									dcterms:modified "2018-07-24"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:dse_AvgFrequency	rdf:type	owl:DatatypeProperty;
+						rdfs:label	"dse_AvgFrequency";
+						rdfs:domain	iasis:DrugSideEffect;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"Represents the average frequecy of particular drug having specific side effect.";
+						dcterms:modified "2018-07-24"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:dse_StandardDeviation	rdf:type	owl:DatatypeProperty;
+							rdfs:label	"dse_StandardDeviation";
+							rdfs:domain	iasis:DrugSideEffect;
+							rdfs:range	rdfs:Literal;
+							rdfs:commnet	"Represents standard deviation from average frequecy of particular drug having specific side effect.";
+							dcterms:modified "2018-07-24"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:externalLink	rdf:type owl:DatatypeProperty;
+					rdfs:label "externalLink";
+					rdfs:domain iasis:Concept;
+				  	rdfs:range xsd:anyURI;
+                  			rdfs:comment "Link to external resources.";
+					dcterms:modified "2018-09-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugDrugInteraction_noCYP	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drugDrugInteraction_noCYP";
+								rdfs:subPropertyOf	iasis:drugDrugInteraction;
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"Interaction between drugs where no CYP enzyme is shared between the drugs (NCRDs).";
+								dcterms:modified "2018-10-23"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugDrugInteraction_sameCYP	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drugDrugInteraction_sameCYP";
+								rdfs:subPropertyOf	iasis:drugDrugInteraction;
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"Interaction between drugs where both drugs are metabolized by the same CY.";
+								dcterms:modified "2018-10-23"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugDrugInteraction_effectiveness	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drugDrugInteraction_direct";
+								rdfs:subPropertyOf	iasis:drugDrugInteraction;	
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"Interaction between drugs where it impacts the effectiveness of them.";
+								dcterms:modified "2018-10-23"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:effectLabel	rdf:type	owl:DatatypeProperty;
+								rdfs:label	"effectLabel";
+								rdfs:domain	iasis:Drug;
+								rdfs:range	rdfs:Literal;
+								rdfs:comment	"Effect Label";
+								dcterms:modified "2018-11-27	"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:impactLabel	rdf:type	owl:DatatypeProperty;
+								rdfs:label	"impactLabel";
+								rdfs:domain	iasis:Drug;
+								rdfs:range	rdfs:Literal;
+								rdfs:comment	"Impact Label.";
+								dcterms:modified "2018-11-27"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:affects	rdf:type	owl:ObjectProperty;
+								rdfs:label	"affects";
+								rdfs:domain	iasis:EffectInteraction;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"The conncetion between drug that affects by the other one through their interaction and the interaction node.";
+								dcterms:modified "2018-11-27"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:isAffected	rdf:type	owl:ObjectProperty;
+								rdfs:label	"isAffected";
+								rdfs:domain	iasis:EffectInteraction;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	"The conncetion between drug that is affected by the other one through their interaction and the interaction node.";
+								dcterms:modified "2018-11-27"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasEffect	rdf:type	owl:ObjectProperty;
+								rdfs:label	"hasEffect";
+								rdfs:domain	iasis:EffectInteraction;
+								rdfs:range	iasis:Effect;
+								rdfs:comment	"The conncetion between the effect of drugs interaction and the interaction node.";
+								dcterms:modified "2018-11-27"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasImpact	rdf:type	owl:ObjectProperty;
+								rdfs:label	"hasImpact";
+								rdfs:domain	iasis:EffectInteraction;
+								rdfs:range	iasis:Impact;
+								rdfs:comment	"The conncetion between the impact of drugs interaction and the interaction node.";
+								dcterms:modified "2018-11-27"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:enzyme_isRelatedTo_gene	rdf:type	owl:ObjectProperty;
+									rdfs:label	"enzyme_isRelatedTo_gene";
+									rdfs:domain	iasis:Enzyme;
+									rdfs:range	iasis:Gene;
+									rdfs:comment	"The connection between the enzyme and the gene from which it is produced.";
+									dcterms:modified "2018-10-30"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:targetID	rdf:type owl:DatatypeProperty;
+					rdfs:label "targetID";
+					rdfs:domain iasis:Target;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Target ID.";
+					dcterms:modified "2018-10-30"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:targetLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "TargetLabel";
+					rdfs:domain iasis:Target;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Target Label.";
+					dcterms:modified "2018-10-30"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:target_isRelatedTo_gene	rdf:type	owl:ObjectProperty;
+									rdfs:label	"target_isRelatedTo_gene";
+									rdfs:domain	iasis:Target;
+									rdfs:range	iasis:Gene;
+									rdfs:comment	"The connection between the target and the gene from which it is produced.";
+									dcterms:modified "2018-10-30"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:uniprotID	rdf:type owl:DatatypeProperty;
+					rdfs:label "uniprotID";
+					rdfs:domain iasis:Concept;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "External connection to accession ID in uniprot.";
+					dcterms:modified "2018-10-30"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:disorderCuiID	rdf:type owl:DatatypeProperty;
+					rdfs:label "disorderCuiID";
+					rdfs:domain iasis:Disorder;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Disorder CUI ID.";
+					dcterms:modified "2018-11-22"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:disorderLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "DisorderLabel";
+					rdfs:domain iasis:Disorder;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Disorder Label.";
+					dcterms:modified "2018-10-30"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:disorderLabel_SPA 	rdf:type owl:DatatypeProperty;
+					rdfs:label "disorderLabel_SPA";
+					rdfs:domain iasis:Disorder;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Disorder Label_SPA.";
+					dcterms:modified "2018-11-25"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:disorderID 	rdf:type owl:DatatypeProperty;
+					rdfs:label "disorderID";
+					rdfs:domain iasis:Disorder;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Disorder ID.";
+					dcterms:modified "2018-11-25"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:hasIndication	rdf:type	owl:ObjectProperty;
+								rdfs:label	"hasIndication";
+								rdfs:subPropertyOf	iasis:hasIndication;
+								rdfs:domain	iasis:Concept;
+								rdfs:range	iasis:Drug;
+								rdfs:comment	".";
+								dcterms:modified "2018-11-22"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugTargetInteraction	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drugTargetInteraction";
+								rdfs:subPropertyOf	iasis:drugTargetInteraction;
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Target;
+								rdfs:comment	"Interaction between drug and its target.";
+								dcterms:modified "2018-10-30"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasInteraction	rdf:type	owl:ObjectProperty;
+								rdfs:label	"hasInteraction";
+								rdfs:subPropertyOf	iasis:hasInteraction;
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Disorder;
+								rdfs:comment	"Indication of disorders that can be related to the drug.";
+								dcterms:modified "2018-10-30"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:drugEnzymeInteraction	rdf:type	owl:ObjectProperty;
+								rdfs:label	"drugEnzymeInteraction";
+								rdfs:subPropertyOf	iasis:drugEnzymeInteraction;
+								rdfs:domain	iasis:Drug;
+								rdfs:range	iasis:Enzyme;
+								rdfs:comment	"Interaction between the drug and the enzyme.";
+								dcterms:modified "2018-10-30"^^xsd:date;
+								dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+iasis:drug_isPredictedToInteractsWith_target	rdf:type	owl:ObjectProperty;
+											rdfs:label	"drug_isPredictedToInteractsWith_target";
+											rdfs:domain	iasis:Drug;
+											rdfs:range	iasis:Target;
+											rdfs:comment	"Predicts drug-target interactions ...";
+											dcterms:modified "2018-11-22"^^xsd:date;
+											dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:sideEffectLabel	rdf:type	owl:DatatypeProperty;
+									rdfs:label	"sideEffectLabel";
+									rdfs:domain	iasis:SideEffect;
+									rdfs:range	rdfs:Literal;
+									rdfs:comment	".";
+									dcterms:modified "2018-11-27"^^xsd:date;
+									dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+#### WP2 requirements:
+##### lc_notes:
+
+iasis:hasPerformanceStatus	rdf:type        owl:ObjectProperty;	
+						rdfs:label	"hasPerformanceStatus";
+						rdfs:domain	iasis:PerformanceObservation;
+						rdfs:range	iasis:PerformanceStatus;
+						rdfs:comment	"Connection between patient with lung cancer and performance status observations.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasObservation	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasObservation";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Observation;
+						rdfs:comment	"Connection between patient with lung cancer and performance status observation or tumor stage observation.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasTki	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasTki";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Drug;
+						rdfs:comment	"Connection between patient with lung cancer and the tki drugs that has been prescribed.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasImmunotherapy	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasImmunotherapy";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Drug;
+						rdfs:comment	"Connection between patient with lung cancer and the immunotherapy drugs that has been prescribed.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasFamiliarAntecedent	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasFamiliarAntecedent";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:FamiliarAntecedent;
+						rdfs:comment	"Connection between patient with lung cancer and her/his familiar antecedents.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:familiarAntecedentLabel	rdf:type        owl:DatatypeProperty;	
+				rdfs:label	"familiarAntecedentLabel";
+						rdfs:domain	iasis:FamiliarAntecedent;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"The title of familiar antecedent.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:familiarAntecedentLabel_SPA	rdf:type        owl:DatatypeProperty;	
+						rdfs:label	"familiarAntecedentLabel_SPA";
+						rdfs:domain	iasis:FamiliarAntecedent;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"The title of familiar antecedent in Spanish.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:familiarAntecedentID	rdf:type        owl:DatatypeProperty;	
+						rdfs:label	"familiarAntecedentID";
+						rdfs:domain	iasis:FamiliarAntecedent;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"The CUI ID of familiar antecedent.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDrug	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasDrug";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Drug;
+						rdfs:comment	"Connection between patient with lung cancer and the drugs that has been prescribed.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasDrugGroup	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasDrug";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:DrugGroup;
+						rdfs:comment	"Connection between patient with lung cancer and the types of drugs that has been prescribed.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:hasComorbidity	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasComorbidity";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Disorder;
+						rdfs:comment	"Connection between patient with lung cancer and her/his Comorbidities.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasChemotherapy	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasChemotherapy";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:Drug;
+						rdfs:comment	"Connection between patient with lung cancer and the Chemotherapy drugs that has been prescribed.";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasLiquidBiopsy	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasLiquidBiopsy";
+						rdfs:domain	iasis:LCPatient;
+						rdfs:range	iasis:LiquidBiopsy;
+						rdfs:comment	"Connection between patient with lung cancer and the liquid biopsy tests that has been run.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasMutation	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasMutation";
+						rdfs:domain	iasis:LiquidBiopsy;
+						rdfs:range	iasis:Mutation;
+						rdfs:comment	"Connection between liquid biopsy test and the mutation that has been observed.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:hasDate	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasDate";
+						rdfs:domain	iasis:Concept;
+						rdfs:range	iasis:Date;
+						rdfs:comment	"Date.";
+						dcterms:modified "2018-10-30"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:lcType	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"LungCancerType";
+				rdfs:domain iasis:Concept;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"The histology kind of the Lung Cancer.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:performanceStatusValue	rdf:type        owl:DatatypeProperty;	
+				rdfs:label	"PerformanceStatusValue";
+						rdfs:domain	iasis:PerformanceStatus;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"The value of performance status observation.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:performanceStatusDate	rdf:type        owl:DatatypeProperty;	
+				rdfs:label	"PerformanceStatusDate";
+						rdfs:domain	iasis:PerformanceStatus;
+						rdfs:range	rdfs:Literal;
+						rdfs:comment	"The Date of performance status observation.";
+						dcterms:modified "2017-10-04"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:gender	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"gender";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Gender value of the patient.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:birthDate	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"birthDate";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	xsd:date;
+				rdfs:comment	"Birth date of the patient.";
+				dcterms:modified "2017-07-24"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:city	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"city";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"The city where the patient lives.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:smoker	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"smoker";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient smokes.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:biomarkerLabel	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"biomarkerLabel";
+				rdfs:domain	iasis:Biomarker;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"The name of biomarker.";
+				dcterms:modified "2018-11-22"^^xsd:date;
+				dcterms:creator   <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:biomarkerCuiID	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"biomarkerCuiID";
+				rdfs:domain	iasis:Biomarker;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"The CUI ID of biomarker (gene ID is considered).";
+				dcterms:modified "2018-11-22"^^xsd:date;
+				dcterms:creator  <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:bioEgfr	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"bioEgfr";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient's biopsies have been studied in terms of EGFR biomarker and if the result has been positive or negative in the case of this specific biomarker.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:bioAlk	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"bioAlk";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient's biopsies have been studied in terms of ALK biomarker and if the result has been positive or negative in the case of this specific biomarker.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:bioRos1	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"bioRos1";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient's biopsies have been studied in terms of ROS1 biomarker and if the result has been positive or negative in the case of this specific biomarker.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:chemotherapy	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"chemotherapy";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received chemotherapy oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tki	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"tki";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received tki oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:immunotherapy	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"immunotherapy";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received immunotherapy oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:antiangiogentic	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"antiangiogentic";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received antiangiogentic oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:antiangiogentic	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"antiangiogentic";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received antiangiogentic oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:radiationtherapy	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"radiationtherapy";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received radiationtherapy oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:surgery	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"surgery";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has received radiationtherapy oncology treatment.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:familiarAntecedents	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"familiarAntecedents";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has families with antecedents of cancer.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:systemicProgression	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"systemicProgression";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has developed systemic progression which means a progression of the tumor to other organs apart from lungs.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:localProgression	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"localProgression";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether the patient has developed local progression which means a progression of the tumor in the lungs.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:brainMetastasis	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"brainMetastasis";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Whether brain metastasis has been detected in the patient.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:survivalMonths	rdf:type	owl:DatatypeProperty;
+				rdfs:label	"survivalMonths";
+				rdfs:domain	iasis:LCPatient;
+				rdfs:range	rdfs:Literal;
+				rdfs:comment	"Months from diagnosis to death or until the last documented record of the patient.";
+				dcterms:modified "2017-10-04"^^xsd:date;
+				dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+
+iasis:sampleDate	rdf:type	owl:DatatypeProperty;
+					rdfs:label	"sampleDate";
+					rdfs:domain	iasis:LiquidBiopsy;
+					rdfs:range	xsd:date;
+					rdfs:comment "Date on which the biopsy sample has been taken.";
+					dcterms:modified "2017-10-04"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:resultDate	rdf:type	owl:DatatypeProperty;
+					rdfs:label	"resultDate";
+					rdfs:domain	iasis:LiquidBiopsy;
+					rdfs:range	xsd:date;
+					rdfs:comment "Date on which the biopsy result has been provided.";
+					dcterms:modified "2017-10-04"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:targetTotal	rdf:type	owl:DatatypeProperty;
+					rdfs:label	"targetTotal";
+					rdfs:domain	iasis:LiquidBiopsy;
+					rdfs:range	rdfs:Literal;
+					rdfs:comment "The percentage of circulating tumor DNA in the blood";
+					dcterms:modified "2017-07-24"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:copiesMicroliterFam	rdf:type	owl:DatatypeProperty;
+							rdfs:label	"copiesMicroliterFam";
+							rdfs:domain	iasis:LiquidBiopsy;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment "Number of mutated copies per microliter of blood";
+							dcterms:modified "2017-07-24"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:copiesMicroliterVic	rdf:type	owl:DatatypeProperty;
+							rdfs:label	"copiesMicroliterVic";
+							rdfs:domain	iasis:LiquidBiopsy;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment "Number of non-mutated copies per microliter of blood";
+							dcterms:modified "2017-07-24"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/jozashoori>.
+
+iasis:tumorTypeLabel	rdf:type owl:DatatypeProperty;
+					rdfs:label "tumorTypeLabel";
+					rdfs:domain iasis:TumorType;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "tumor Type Label.";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tumorTypeLabel_SPA	rdf:type owl:DatatypeProperty;
+					rdfs:label "tumorTypeLabel_SPA";
+					rdfs:domain iasis:TumorType;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "tumor Type Label_SPA.";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tumorTypeID	rdf:type owl:DatatypeProperty;
+					rdfs:label ":tumorTypeID";
+					rdfs:domain iasis:TumorType;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "tumor Type ID.";
+					dcterms:modified "2018-11-27"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugLabel_SPA	 rdf:type  owl:DatatypeProperty;
+					rdfs:label "drugLabel_SPA";	
+                                        rdfs:domain iasis:Drug;
+               			        rdfs:range rdfs:Literal;
+					rdfs:comment	"";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugBankID rdf:type owl:DatatypeProperty;
+					rdfs:label "DrugBankID";
+					rdfs:domain iasis:Drug;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Drug Bank ID.";
+					dcterms:modified "2018-11-22"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugGroupLabel  rdf:type owl:DatatypeProperty;
+					rdfs:label "drugGroupLabel";
+					rdfs:domain iasis:DrugGroup;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Drug Group Label.";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugGroupLabel_SPA  rdf:type owl:DatatypeProperty;
+					rdfs:label "drugGroupLabel_SPA";
+					rdfs:domain iasis:DrugGroup;
+				  	rdfs:range rdfs:Literal;
+                  			rdfs:comment "Drug Group Label_SPA.";
+					dcterms:modified "2018-11-26"^^xsd:date;
+					dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasTumorStage	rdf:type        owl:ObjectProperty;	
+				rdfs:label	"hasTumorStage";
+						rdfs:domain	iasis:TumorObservation;
+						rdfs:range	iasis:TumorStage;
+						rdfs:comment	".";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tumorStageLabel      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"tumorStageLabel";
+							rdfs:domain	iasis:TumorStage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:tumorStageID      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"tumorStageID";
+							rdfs:domain	iasis:TumorStage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+##### lc_images:
+
+iasis:bodyPartExaminedLabel     rdf:type	owl:DatatypeProperty;
+							rdfs:label	"bodyPartExaminedLabel";
+							rdfs:domain	iasis:BodyPartExamined;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:bodyPartExaminedCuiID    rdf:type   owl:DatatypeProperty;
+							rdfs:label	"BodyPartExaminedCuiID";
+							rdfs:domain	iasis:BodyPartExamined;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:diagnosisLabel    rdf:type	owl:DatatypeProperty;
+							rdfs:label	"diagnosisLabel";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:diagnosisLabel_SPA    rdf:type	owl:DatatypeProperty;
+							rdfs:label	"diagnosisLabel_SPA";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:diagnosisID        rdf:type	owl:DatatypeProperty;
+							rdfs:label	"diagnosisID";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:genderLabel        rdf:type     owl:DatatypeProperty;
+							rdfs:label	"genderLabel";
+							rdfs:domain	iasis:Cocept;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:genderID       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"genderID";
+							rdfs:domain	iasis:Concept;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasImage       rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasImage";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	iasis:Image;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:modality      rdf:type     owl:ObjectProperty;
+							rdfs:label	"modality";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	iasis:Modality;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:manufacturer       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"manufacturer";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:studyDescription       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"studyDescription";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:bodyPartExamined      rdf:type     owl:ObjectProperty;
+							rdfs:label	"bodyPartExamined";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	iasis:BodyPartExamined;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:sliceThickness       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"sliceThickness";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:protocolName       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"protocolName";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:patientPosition      rdf:type     owl:ObjecteProperty;
+							rdfs:label	"patientPosition";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	iasis:PatientPosition;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:rows       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"rows";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:columns       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"columns";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:pixelSpacingX       rdf:type     owl:DatatypeProperty;
+							rdfs:label	"pixelSpacingX";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:pixelSpacingY      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"pixelSpacingY";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:bitsAllocated      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"bitsAllocated";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:bitsStored      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"bitsStored";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:highBit      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"highBit";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:rescaleIntercept      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"rescaleIntercept";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:rescaleSlope      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"rescaleSlope";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:huphm      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"huphm";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:lungLaterality      rdf:type     owl:ObjectProperty;
+							rdfs:label	"lungLaterality";
+							rdfs:domain	iasis:Organ;
+							rdfs:range	iasis:LungLaterality;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:lungLateralityLabel      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"lungLateralityLabel";
+							rdfs:domain	iasis:LungLaterality;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:lungLateralityCuiID      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"lungLateralityCuiID";
+							rdfs:domain	iasis:LungLaterality;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:modalityLabel      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"modalityLabel";
+							rdfs:domain	iasis:Modality;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:modalityCuiID      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"modalityCuiID";
+							rdfs:domain	iasis:Modality;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasOrgans     rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasOrgans";
+							rdfs:domain	iasis:LCImage;
+							rdfs:range	iasis:Organ;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDiagnosis     rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasDiagnosis";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	iasis:Diagnosis;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDiagnosisTumorStage   rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasDiagnosisTumorStage";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	iasis:TumorStage;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDiagnosisDate   rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasDiagnosisDate";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	iasis:Date;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDiagnosisAge   rdf:type     owl:DatatypeProperty;
+							rdfs:label	"hasDiagnosisAge";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:hasDiagnosisPerformanceStatus   rdf:type     owl:ObjectProperty;
+							rdfs:label	"hasDiagnosisPerformanceStatus";
+							rdfs:domain	iasis:Diagnosis;
+							rdfs:range	iasis:status;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:patientPositionLabel     rdf:type     owl:DatatypeProperty;
+							rdfs:label	"patientPositionLabel";
+							rdfs:domain	iasis:PatientPosition;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:patientPositionCuiID      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"patientPositionCuiID";
+							rdfs:domain	iasis:PatientPosition;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-25"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+####### lc_similarity:
+iasis:chemotherapyList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"chemotherapyList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:immunotherapyList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"immunotherapyList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+
+iasis:tkiList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"tkiList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:comorbidityList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"comorbidityList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:drugGroupList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"drugGroupList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:biopsyList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"biopsyList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:ecogList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"ecogList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:stageList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"stageList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:familialAntecedentList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"familialAntecedentList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:nonOncologicalTreatmentList      rdf:type     owl:DatatypeProperty;
+							rdfs:label	"nonOncologicalTreatmentList";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:isBetweenPatients	rdf:type        owl:ObjectProperty;	
+				                rdfs:label	"isBetweenPatients";
+						rdfs:domain	iasis:PatientSimilarity;
+						rdfs:range	iasis:LCPatient;
+						rdfs:comment	".";
+						dcterms:modified "2018-11-27"^^xsd:date;
+						dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
+
+iasis:similarityValue     rdf:type     owl:DatatypeProperty;
+							rdfs:label	"similarityValue";
+							rdfs:domain	iasis:LCPatient;
+							rdfs:range	rdfs:Literal;
+							rdfs:comment ".";
+							dcterms:modified "2018-11-27"^^xsd:date;
+							dcterms:creator <https://www.l3s.de/de/user/mcastellanosd87>.
