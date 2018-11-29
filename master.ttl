@@ -9,6 +9,11 @@
 ################################## Classes ###############################################
 ##########################################################################################
 
+iasis:ِAhmedConcept 	rdf:type	owl:Class;
+				rdfs:label	"Ahmed";
+				rdfs:comment "Constituents of thoughts or real world entities.";
+				dcterms:modified "2017-10-23"^^xsd:date;
+				dcterms:creator <https://www.tib.eu/en/research-development/scientific-data-management/staff/>.
 iasis:Concept 	rdf:type	owl:Class;
 				rdfs:label	"Concept";
 				rdfs:comment "Constituents of thoughts or real world entities.";
